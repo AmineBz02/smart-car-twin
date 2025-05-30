@@ -3,7 +3,7 @@
 
 This repository documents a **Digital Twin** system for a smart car. It simulates real-time sensor data using FIWARE Orion Context Broker and visualizes the data through a dashboard interface.
 
-🔗 **[View Deployed Dashboard Here]([http://YOUR-DASHBOARD-LINK-HERE](https://amine-smart-car-twin.netlify.app/))**
+🔗 **[View Deployed Dashboard Here]((https://amine-smart-car-twin.netlify.app/))**
 
 
 ---
