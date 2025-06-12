@@ -134,7 +134,7 @@ You can deploy this app using [Netlify](https://netlify.com), Vercel, or GitHub 
 4. Set **Publish Directory**: `dist/`
 5. Deploy!
 
-Live Example: [clever-sawine-db1ba9.netlify.app](https://clever-sawine-db1ba9.netlify.app)
+Live Example: [amine-smart-car-twin.netlify.app](https://amine-smart-car-twin.netlify.app/)
 
 ---
 
