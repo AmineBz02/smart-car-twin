@@ -1,82 +1,155 @@
 
-# 🚗 Smart Car Digital Twin
-
-This repository documents a **Digital Twin** system for a smart car. It simulates real-time sensor data using FIWARE Orion Context Broker and visualizes the data through a dashboard interface.
-link to the site
-🔗https://amine-smart-car-twin.netlify.app/
 
 
----
+# 🚗 Smart Car Digital Twin Dashboard
 
-## 📖 Project Overview
+A modern, real-time dashboard for monitoring a smart vehicle using data from a **FIWARE Orion Context Broker**. The interface features gauges, indicators, and maps to visualize vehicle metrics with auto-refresh and fallback simulation when offline.
 
-The project demonstrates how sensor data (speed, battery level, temperature, etc.) can be simulated and sent to a Digital Twin backend. The data is then visualized via a modern dashboard UI.
+## 🌐 Live Demo
+
+👉 [Live on Netlify](https://amine-smart-car-twin.netlify.app/)
 
 ---
 
-## 🏗️ System Architecture
+## 🧩 Features
+
+- 🔄 Real-time data fetching from Orion Context Broker every 10 seconds
+- 📍 GPS location displayed on an interactive map
+- ⚙️ Configurable IP address for Orion Context Broker
+- ⛽ Animated **Fuel Gauge**
+- 🌡️ Color-coded **Engine Temperature** display
+- 🚀 Dynamic **Speedometer** with smooth animations
+- 💡 Offline Mode: Sensor simulation when broker is unreachable
+- 🎨 Responsive and dark-mode UI with modern design
+
+---
+
+## 📦 Project Structure
 
 ```
 
-\[Sensor Simulator (VM)] --> \[Orion Context Broker (VM)] --> \[MongoDB (VM)]
-|
-V
-\[Frontend Dashboard (Hosted)]
+├── package.json
+├── index.html
+├── src/
+│   ├── index.css
+│   ├── App.tsx
+│   ├── types/
+│   │   └── VehicleData.ts
+│   ├── hooks/
+│   │   ├── useVehicleData.ts
+│   │   └── useSimulatedData.ts
+│   ├── components/
+│   │   ├── ConfigForm.tsx
+│   │   ├── Speedometer.tsx
+│   │   ├── FuelGauge.tsx
+│   │   ├── TemperatureIndicator.tsx
+│   │   ├── LocationMap.tsx
+│   │   └── Dashboard.tsx
 
 ````
 
-- **Sensor Simulation**: Sends mock car telemetry to Orion.
-- **Orion Context Broker**: Receives and manages context data.
-- **MongoDB**: Stores data persistently.
-- **Dashboard**: Fetches and displays real-time data.
-
 ---
 
-## 🧾 Data Model (JSON Example)
+## 🛠️ Getting Started
 
-```json
-{
-  "id": "urn:ngsi-ld:SmartCar:001",
-  "type": "SmartCar",
-  "speed": { "type": "Number", "value": 75 },
-  "battery": { "type": "Number", "value": 85 },
-  "temperature": { "type": "Number", "value": 28 }
-}
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/AmineBz02/smart-car-twin.git
+cd smart-car-twin
 ````
 
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Start the Development Server
+
+```bash
+npm run dev
+```
+
+The app will be available at [http://localhost:5173](http://localhost:5173)
+
 ---
 
-## 🛠️ How to Run Locally (Optional)
+## ⚙️ Configuration
 
-To simulate or test locally:
+On first load, the dashboard prompts you to enter the IP address of your **Orion Context Broker** (e.g., `192.168.1.100`). The IP is stored in local storage and automatically used to fetch data.
 
-1. Clone this repo.
-2. Use `docker-compose up` to start Orion and MongoDB.
-3. Run the sensor simulation with Node.js:
+**API Endpoint Example:**
 
-   ```bash
-   node simulate-sensor.js
-   ```
-4. Visit the deployed dashboard via the link above.
+```
+http://<IP_ADDRESS>:1026/v2/entities/urn:ngsi-ld:Vehicle:001
+```
 
 ---
 
-## 📦 Installation Dependencies
+## 🧪 Sensor Simulation Mode
 
-* Docker & Docker Compose
-* Node.js (for simulation)
+If the Orion Context Broker is unreachable or not configured, the dashboard falls back to **realistic simulated data**, including:
+
+* Random but smooth speed fluctuations
+* Gradual fuel decrease
+* Temperature oscillation
+* Moving GPS coordinates (around London)
+
+A banner appears when simulated data is being used.
+
+---
+
+## 📡 Vehicle Data Attributes
+
+| Attribute     | Type    | Unit    | Description              |
+| ------------- | ------- | ------- | ------------------------ |
+| `speed`       | Number  | km/h    | Current speed            |
+| `engineTemp`  | Number  | °C      | Engine temperature       |
+| `fuelLevel`   | Number  | %       | Fuel remaining           |
+| `gpsLocation` | GeoJSON | lat/lng | Current vehicle location |
+
+---
+
+## 🖼️ Visual Components
+
+* `Speedometer`: Circular gauge with speed value
+* `TemperatureIndicator`: Numeric display with colored range
+* `FuelGauge`: Horizontal/vertical fuel level bar
+* `LocationMap`: Map with live vehicle marker
+* `ConfigForm`: Set Orion Broker IP
+* `Dashboard`: Composed layout of all widgets
+
+---
+
+## 🚀 Deployment
+
+You can deploy this app using [Netlify](https://netlify.com), Vercel, or GitHub Pages.
+
+### ✅ Netlify Deployment Steps
+
+1. Push to GitHub
+2. Link your repo in Netlify
+3. Set **Build Command**: `npm run build`
+4. Set **Publish Directory**: `dist/`
+5. Deploy!
+
+Live Example: [clever-sawine-db1ba9.netlify.app](https://clever-sawine-db1ba9.netlify.app)
+
+---
+
+## 🧠 Credits
+
+Built with ❤️ using React + TypeScript, styled for clarity and readability.
 
 ---
 
 ## 📜 License
 
-MIT License
+This project is licensed under the [MIT License](LICENSE).
 
----
-
-> Created as part of the Digital Twin final project – SUPCOM 2025.
+```
 
 
-
----
+```
 
